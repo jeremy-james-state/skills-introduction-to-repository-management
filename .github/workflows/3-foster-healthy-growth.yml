@@ -78,8 +78,13 @@ jobs:
               message: ''
             }
 
-            // Check that file exists
-            if (!fs.existsSync('add-issue-templates/CODE_OF_CONDUCT.md')) {
+            // Check that file exists in either exercise branch checkout
+            const codeOfConductPaths = [
+              'prepare-to-collaborate/CODE_OF_CONDUCT.md',
+              'add-issue-templates/CODE_OF_CONDUCT.md'
+            ];
+
+            if (!codeOfConductPaths.some(filePath => fs.existsSync(filePath))) {
               result.passed = false;
               result.message = 'File is missing.';
             }
